@@ -1,7 +1,7 @@
 from os import system
 import random
 def game_table(tablebox):
-    system('cls')
+    system('clear')
     print(tablebox[7]+"|"+tablebox[8]+"|"+tablebox[9])
     print("-----")
     print(tablebox[4]+"|"+tablebox[5]+"|"+tablebox[6])
@@ -19,7 +19,7 @@ def player_input():
     while marker !='x' and marker !='o':
         marker = input('Player1 : choose x or o : ')
         marker.upper();
-    if marker == 'X':
+    if marker == 'X' or marker == 'x':
         return ('X','O')
     else:
         return ('O','X')
@@ -31,9 +31,10 @@ def full_board_check(tablebox):
             return False
     return True
 def winner_check(tablebox,mark):
-    if((tablebox[1] == tablebox[2]==tablebox[3])=='X' or (tablebox[1] == tablebox[5]==tablebox[9])=='X' or (tablebox[1] == tablebox[4]==tablebox[7])==mark or (tablebox[3] == tablebox[6]==tablebox[9])==mark or (tablebox[8] == tablebox[9]==tablebox[7])==mark or (tablebox[5] == tablebox[3]==tablebox[7])==mark ):
+    print(tablebox[1] == mark)
+    if((tablebox[1]== mark and tablebox[2]== mark and tablebox[3]==mark) or (tablebox[1]== mark and tablebox[5]== mark and tablebox[9]==mark) or (tablebox[1]== mark and tablebox[4]== mark and tablebox[7]==mark) or (tablebox[3]== mark and tablebox[6]== mark and tablebox[9]==mark) or (tablebox[3]== mark and tablebox[5]== mark and tablebox[9]==mark) or (tablebox[2]== mark and tablebox[5]== mark and tablebox[8]==mark) or (tablebox[7]== mark and tablebox[8]== mark and tablebox[9]==mark) or (tablebox[4]== mark and tablebox[5]== mark and tablebox[6]==mark)):
         print("player 1 is the winner")
-        return 1
+        return True
     
 def replay():
     responce = input("Play again? Enter Yes or No : ")
@@ -62,6 +63,7 @@ while True:
             if winner_check(tablebox,player1):
                 game_table(tablebox)
                 print('Player 1 Has Won !!')
+                game_on = False
             else:
                 if full_board_check(tablebox):
                     game_table(tablebox)
@@ -76,6 +78,7 @@ while True:
             if winner_check(tablebox,player2):
                 game_table(tablebox)
                 print('Player 2 Has Won !!')
+                game_on = False
             else:
                 if full_board_check(tablebox):
                     game_table(tablebox)
